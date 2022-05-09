@@ -12,6 +12,12 @@
 		A10E2C762829156E00CA0BB1 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C752829156E00CA0BB1 /* MainController.swift */; };
 		A10E2C7B2829157200CA0BB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10E2C7A2829157200CA0BB1 /* Assets.xcassets */; };
 		A10E2C7E2829157200CA0BB1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A10E2C7C2829157200CA0BB1 /* LaunchScreen.storyboard */; };
+		A10E2C8A28293ACC00CA0BB1 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C8928293ACC00CA0BB1 /* Filter.swift */; };
+		A10E2C8C28293BA400CA0BB1 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C8B28293BA400CA0BB1 /* MainPresenter.swift */; };
+		A10E2C8E28293C0D00CA0BB1 /* MainInputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C8D28293C0D00CA0BB1 /* MainInputDelegate.swift */; };
+		A10E2C9028293F7000CA0BB1 /* MainOutputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C8F28293F7000CA0BB1 /* MainOutputDelegate.swift */; };
+		A10E2C922829455B00CA0BB1 /* FilterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C912829455B00CA0BB1 /* FilterGroup.swift */; };
+		A10E2C9428294C9A00CA0BB1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C9328294C9A00CA0BB1 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +28,12 @@
 		A10E2C7A2829157200CA0BB1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A10E2C7D2829157200CA0BB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A10E2C7F2829157200CA0BB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A10E2C8928293ACC00CA0BB1 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		A10E2C8B28293BA400CA0BB1 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		A10E2C8D28293C0D00CA0BB1 /* MainInputDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInputDelegate.swift; sourceTree = "<group>"; };
+		A10E2C8F28293F7000CA0BB1 /* MainOutputDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOutputDelegate.swift; sourceTree = "<group>"; };
+		A10E2C912829455B00CA0BB1 /* FilterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterGroup.swift; sourceTree = "<group>"; };
+		A10E2C9328294C9A00CA0BB1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +79,9 @@
 		A10E2C852829229600CA0BB1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A10E2C8928293ACC00CA0BB1 /* Filter.swift */,
+				A10E2C912829455B00CA0BB1 /* FilterGroup.swift */,
+				A10E2C9328294C9A00CA0BB1 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -74,6 +89,7 @@
 		A10E2C86282922A300CA0BB1 /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				A10E2C8B28293BA400CA0BB1 /* MainPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -83,6 +99,8 @@
 			children = (
 				A10E2C7C2829157200CA0BB1 /* LaunchScreen.storyboard */,
 				A10E2C752829156E00CA0BB1 /* MainController.swift */,
+				A10E2C8D28293C0D00CA0BB1 /* MainInputDelegate.swift */,
+				A10E2C8F28293F7000CA0BB1 /* MainOutputDelegate.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -166,9 +184,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A10E2C8C28293BA400CA0BB1 /* MainPresenter.swift in Sources */,
+				A10E2C9028293F7000CA0BB1 /* MainOutputDelegate.swift in Sources */,
 				A10E2C762829156E00CA0BB1 /* MainController.swift in Sources */,
+				A10E2C8E28293C0D00CA0BB1 /* MainInputDelegate.swift in Sources */,
+				A10E2C8A28293ACC00CA0BB1 /* Filter.swift in Sources */,
+				A10E2C9428294C9A00CA0BB1 /* User.swift in Sources */,
 				A10E2C722829156E00CA0BB1 /* AppDelegate.swift in Sources */,
 				A10E2C742829156E00CA0BB1 /* SceneDelegate.swift in Sources */,
+				A10E2C922829455B00CA0BB1 /* FilterGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
