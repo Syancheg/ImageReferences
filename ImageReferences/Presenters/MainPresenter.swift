@@ -34,7 +34,8 @@ extension MainPresenter: MainOutputDelegate {
     }
     
     func tapToDraw() {
-        
+        print(self.currentFilters)
+        print("Draw!")
     }
     
     
@@ -42,4 +43,4 @@ extension MainPresenter: MainOutputDelegate {
         self.currentFilters = self.currentFilters.merging(index) { (_, new) in new }
     }
 
-} 
+}
