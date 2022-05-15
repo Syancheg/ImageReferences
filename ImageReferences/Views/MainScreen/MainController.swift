@@ -37,12 +37,13 @@ class MainController: UIViewController {
     }
     
     private func setupSelects() {
+        
         let view = UIView(frame: CGRect(x: 0, y: 245, width: self.view.bounds.width, height: 400))
-        let heigth = 100.0
+        let heigth = 80.0
         var curHeigth = 0.0
         for index in 1...4 {
             let rect = CGRect(x: 0, y: curHeigth, width: self.view.bounds.width, height: heigth)
-            let filterView = FilterView(frame: rect,
+            let filterView = Dropdown(frame: rect,
                                         filterGroupId: index,
                                         filters: filterGroups.first?.filters ?? [],
                                         delegate: presenter)
