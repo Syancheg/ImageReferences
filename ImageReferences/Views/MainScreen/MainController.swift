@@ -14,9 +14,32 @@ class MainController: UIViewController {
     private var user: User?
     weak private var mainOutputDelegate: MainOutputDelegate?
     
+    var logoView: LogoView = {
+        let view = LogoView()
+        return view
+    }()
+    
+    var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 15
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
+    
+    var button: UIButton =  {
+        let button = UIButton()
+        button.setTitle("Начать", for: .normal)
+        button.tintColor = .white
+        button.layer.cornerRadius = 5
+        button.backgroundColor = UIColor(red: 0.03, green: 0.70, blue: 0.58, alpha: 1.00)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Main Screen"
+        title = "Выберите категории"
         presenter.setMainInputDelegate(mainInputDelegate: self)
         self.mainOutputDelegate = presenter
         guard self.mainOutputDelegate != nil else { return }
@@ -25,41 +48,48 @@ class MainController: UIViewController {
     }
     
     private func setupViews(){
-        self.view.backgroundColor = .white
-        self.setupLogo()
-        self.setupSelects()
-        self.setupButton()
+        view.backgroundColor = .white
+        setupLogo()
+        setupSelects()
+        setupButton()
+        setupConstraints()
     }
     
     private func setupLogo() {
-        let logoView = LogoView(frame: CGRect(x: 0, y: 100, width: self.view.bounds.width, height: 145))
-        self.view.addSubview(logoView)
+        logoView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(logoView)
     }
     
     private func setupSelects() {
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        let view = UIView(frame: CGRect(x: 0, y: 245, width: self.view.bounds.width, height: 400))
-        let heigth = 80.0
-        var curHeigth = 0.0
+        view.addSubview(stackView)
         for index in 1...4 {
-            let rect = CGRect(x: 0, y: curHeigth, width: self.view.bounds.width, height: heigth)
-            let filterView = Dropdown(frame: rect,
-                                        filterGroupId: index,
-                                        filters: filterGroups.first?.filters ?? [],
-                                        delegate: presenter)
-            view.addSubview(filterView)
-            curHeigth += heigth
+            let drop = DropdownView(frame: .zero, filterGroupId: index, filters: filterGroups[0].filters, delegate: presenter)
+            stackView.addArrangedSubview(drop)
         }
-        self.view.addSubview(view)
     }
     
-    private func setupButton(){
-        let button = UIButton(frame: CGRect(x: (self.view.bounds.width / 2) - 75, y: self.view.bounds.height - 100 , width: 150, height: 50))
-        button.layer.cornerRadius = 10
-        button.backgroundColor = .systemBlue
-        button.setTitle("Приступить", for: .normal)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        self.view.addSubview(button)
+    private func setupButton() {
+        button.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(button)
+    }
+    
+    private func setupConstraints(){
+        NSLayoutConstraint.activate([
+            self.logoView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100),
+            self.logoView.heightAnchor.constraint(equalToConstant: 100),
+            self.logoView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            
+            self.stackView.topAnchor.constraint(equalTo: self.logoView.bottomAnchor),
+            self.stackView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            self.stackView.heightAnchor.constraint(equalToConstant: self.view.bounds.height / 2),
+            
+            self.button.topAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -80),
+            self.button.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 30),
+            self.button.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -30),
+            self.button.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
     
     @objc func buttonAction(sender: UIButton!) {

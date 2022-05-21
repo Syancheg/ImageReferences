@@ -10,7 +10,7 @@ import UIKit
 
 class ImageView: UIView {
     
-    let imageView: UIImageView = {
+    var imageView: UIImageView = {
         let imageView = UIImageView()
         return imageView
     }()

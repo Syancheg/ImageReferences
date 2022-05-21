@@ -19,7 +19,6 @@
 		A10E2C922829455B00CA0BB1 /* FilterGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C912829455B00CA0BB1 /* FilterGroup.swift */; };
 		A10E2C9428294C9A00CA0BB1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C9328294C9A00CA0BB1 /* User.swift */; };
 		A10E2C9B2829800A00CA0BB1 /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C9A2829800A00CA0BB1 /* LogoView.swift */; };
-		A10E2C9D2831248A00CA0BB1 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C9C2831248A00CA0BB1 /* Dropdown.swift */; };
 		A10E2CA12831738200CA0BB1 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CA02831738200CA0BB1 /* ImageViewController.swift */; };
 		A10E2CA32831739900CA0BB1 /* ImageInputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CA22831739900CA0BB1 /* ImageInputDelegate.swift */; };
 		A10E2CA5283173A800CA0BB1 /* ImageOutputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CA4283173A800CA0BB1 /* ImageOutputDelegate.swift */; };
@@ -27,6 +26,7 @@
 		A10E2CA9283173DE00CA0BB1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CA8283173DE00CA0BB1 /* Image.swift */; };
 		A10E2CAB28394A5700CA0BB1 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CAA28394A5700CA0BB1 /* TimerView.swift */; };
 		A10E2CAD28395CDF00CA0BB1 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CAC28395CDF00CA0BB1 /* ImageView.swift */; };
+		A10E2CAF2839726400CA0BB1 /* DropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CAE2839726400CA0BB1 /* DropdownView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +44,6 @@
 		A10E2C912829455B00CA0BB1 /* FilterGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterGroup.swift; sourceTree = "<group>"; };
 		A10E2C9328294C9A00CA0BB1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A10E2C9A2829800A00CA0BB1 /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
-		A10E2C9C2831248A00CA0BB1 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
 		A10E2CA02831738200CA0BB1 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		A10E2CA22831739900CA0BB1 /* ImageInputDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputDelegate.swift; sourceTree = "<group>"; };
 		A10E2CA4283173A800CA0BB1 /* ImageOutputDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOutputDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +51,7 @@
 		A10E2CA8283173DE00CA0BB1 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		A10E2CAA28394A5700CA0BB1 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		A10E2CAC28395CDF00CA0BB1 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		A10E2CAE2839726400CA0BB1 /* DropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,9 +138,9 @@
 			isa = PBXGroup;
 			children = (
 				A10E2C9A2829800A00CA0BB1 /* LogoView.swift */,
-				A10E2C9C2831248A00CA0BB1 /* Dropdown.swift */,
 				A10E2CAA28394A5700CA0BB1 /* TimerView.swift */,
 				A10E2CAC28395CDF00CA0BB1 /* ImageView.swift */,
+				A10E2CAE2839726400CA0BB1 /* DropdownView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -236,13 +236,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A10E2C8C28293BA400CA0BB1 /* MainPresenter.swift in Sources */,
+				A10E2CAF2839726400CA0BB1 /* DropdownView.swift in Sources */,
 				A10E2C9028293F7000CA0BB1 /* MainOutputDelegate.swift in Sources */,
 				A10E2C9B2829800A00CA0BB1 /* LogoView.swift in Sources */,
 				A10E2C762829156E00CA0BB1 /* MainController.swift in Sources */,
 				A10E2C8E28293C0D00CA0BB1 /* MainInputDelegate.swift in Sources */,
 				A10E2C8A28293ACC00CA0BB1 /* Filter.swift in Sources */,
 				A10E2CAD28395CDF00CA0BB1 /* ImageView.swift in Sources */,
-				A10E2C9D2831248A00CA0BB1 /* Dropdown.swift in Sources */,
 				A10E2CAB28394A5700CA0BB1 /* TimerView.swift in Sources */,
 				A10E2CA7283173CF00CA0BB1 /* ImagePresenter.swift in Sources */,
 				A10E2CA32831739900CA0BB1 /* ImageInputDelegate.swift in Sources */,
