@@ -17,7 +17,6 @@ class DropdownView: UIView {
     var button: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-        button.setTitle("Начать", for: .normal)
         button.tintColor = .black
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 5
@@ -62,8 +61,9 @@ class DropdownView: UIView {
         setupConstraints()
     }
     
-    convenience init(frame: CGRect, filterGroupId: Int, filters: [Filter], delegate: MainOutputDelegate) {
+    convenience init(frame: CGRect, filterGroupId: Int, filterButton: String, filters: [Filter], delegate: MainOutputDelegate) {
         self.init(frame: frame)
+        self.button.setTitle(filterButton, for: .normal)
         self.filterGroupId = filterGroupId
         self.filters = filters
         self.delegate = delegate

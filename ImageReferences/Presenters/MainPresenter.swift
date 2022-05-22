@@ -19,24 +19,28 @@ class MainPresenter {
     }
     
     private func loadTestData() {
-        if let delegate = self.mainInputDelegate {
-            delegate.setupFilters(with: self.filters)
-            delegate.setupUser(user: self.user)
+        let service = ApiService()
+        service.getFilters { filters in
+            guard let filters = filters else { return }
+            if let delegate = self.mainInputDelegate {
+                delegate.setupFilters(with: filters)
+                delegate.setupUser(user: self.user)
+            }
         }
     }
     
 }
 
 extension MainPresenter: MainOutputDelegate {
+    func setupData() {
+        self.loadTestData()
+    }
+    
     
     var currentFilter: [Int : Int] {
         get {
             return self.currentFilters
         }
-    }
-    
-    func setupData() {
-        self.loadTestData()
     }
     
     func setFilter(with index: [Int : Int]) {
