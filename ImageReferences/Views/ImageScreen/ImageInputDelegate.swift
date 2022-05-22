@@ -6,3 +6,8 @@
 //
 
 import Foundation
+import UIKit
+
+protocol ImageInputDelegate: AnyObject {
+    func setupImage(url: String)
+}

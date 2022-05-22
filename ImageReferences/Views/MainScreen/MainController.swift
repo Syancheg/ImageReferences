@@ -96,6 +96,7 @@ class MainController: UIViewController {
         guard let delegate = self.mainOutputDelegate else { return }
         let imageViewContoller = ImageViewController()
         imageViewContoller.currentFilters = delegate.currentFilter
+        imageViewContoller.fullTime = 43
         self.navigationController?.pushViewController(imageViewContoller, animated: true)
     }
 

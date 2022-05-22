@@ -4,7 +4,6 @@
 //
 //  Created by Константин Кузнецов on 09.05.2022.
 //
-
 import Foundation
 
 struct Filter {
