@@ -11,6 +11,7 @@ class ImageViewController: UIViewController {
     
     
     var currentFilters: [Int:Int] = [:]
+    var fullTime = 123
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,7 @@ class ImageViewController: UIViewController {
         button.tintColor = .white
         button.layer.cornerRadius = 5
         button.backgroundColor = UIColor(red: 0.03, green: 0.70, blue: 0.58, alpha: 1.00)
+        button.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
         return button
     }()
 
@@ -46,6 +48,23 @@ class ImageViewController: UIViewController {
         view.addSubview(imageView)
         view.addSubview(button)
         setupConstraints()
+        timerView.fullTime = fullTime
+    }
+    
+    @objc func startButtonAction() {
+        button.setTitle("Остановить", for: .normal)
+        button.backgroundColor = UIColor(red: 1.00, green: 0.35, blue: 0.35, alpha: 1.00)
+        button.removeTarget(nil, action: nil, for: .allEvents)
+        button.addTarget(self, action: #selector(stopButtonAction), for: .touchUpInside)
+        timerView.start()
+    }
+    
+    @objc func stopButtonAction() {
+        button.setTitle("Начать", for: .normal)
+        button.backgroundColor = UIColor(red: 0.03, green: 0.70, blue: 0.58, alpha: 1.00)
+        button.removeTarget(nil, action: nil, for: .allEvents)
+        button.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
+        timerView.stop()
     }
     
     private func setupConstraints() {

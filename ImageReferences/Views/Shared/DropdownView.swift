@@ -85,7 +85,7 @@ class DropdownView: UIView {
         button.layer.shadowOpacity = 0
     }
     
-    @objc func buttonAction() {
+    @objc private func buttonAction() {
         if (table.superview != nil) {
             table.removeFromSuperview()
             buttonUnActive()
@@ -107,11 +107,6 @@ class DropdownView: UIView {
             self.button.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             self.button.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
             self.button.heightAnchor.constraint(equalToConstant: 50),
-            
-//            self.table.topAnchor.constraint(equalTo: self.button.bottomAnchor, constant: 10),
-//            self.table.heightAnchor.constraint(equalToConstant: 350),
-//            self.table.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
-//            self.table.rightAnchor.constraint(equalTo: rightAnchor, constant: -15)
             
         ])
     }
