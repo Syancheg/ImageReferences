@@ -14,9 +14,7 @@ class ImageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Second"
         view.backgroundColor = .white
-        print(currentFilters)
         setupView()
     }
     
