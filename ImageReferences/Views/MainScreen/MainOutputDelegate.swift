@@ -10,5 +10,5 @@ import Foundation
 protocol MainOutputDelegate: AnyObject {
     func setupData()
     func setFilter(with index: [Int:Int])
-    func tapToDraw()
+    var currentFilter: [Int: Int] { get }
 }

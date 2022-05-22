@@ -64,7 +64,9 @@ class MainController: UIViewController {
     
     @objc func buttonAction(sender: UIButton!) {
         guard let delegate = self.mainOutputDelegate else { return }
-        delegate.tapToDraw()
+        let imageViewContoller = ImageViewController()
+        imageViewContoller.currentFilters = delegate.currentFilter
+        self.navigationController?.pushViewController(imageViewContoller, animated: true)
     }
 
 }

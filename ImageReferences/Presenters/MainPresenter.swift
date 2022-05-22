@@ -29,15 +29,15 @@ class MainPresenter {
 
 extension MainPresenter: MainOutputDelegate {
     
+    var currentFilter: [Int : Int] {
+        get {
+            return self.currentFilters
+        }
+    }
+    
     func setupData() {
         self.loadTestData()
     }
-    
-    func tapToDraw() {
-        print(self.currentFilters)
-        print("Draw!")
-    }
-    
     
     func setFilter(with index: [Int : Int]) {
         self.currentFilters = self.currentFilters.merging(index) { (_, new) in new }
