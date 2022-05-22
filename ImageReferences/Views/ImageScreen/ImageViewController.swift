@@ -11,7 +11,7 @@ class ImageViewController: UIViewController {
     
     
     var currentFilters: [Int:Int] = [:]
-    var fullTime = 123
+    var fullTime = 7
 
     override func viewDidLoad() {
         super.viewDidLoad()

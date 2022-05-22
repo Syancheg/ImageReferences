@@ -89,8 +89,8 @@ class TimerView: UIView {
     }
     
     private func setTimeToLabel(sec: Int) {
-        let min = sec / 60  as Int
-        let sec = sec  % 60 as Int
+        let min = Int(sec / 60)
+        let sec = Int(sec % 60)
         var strTime: String
         if sec < 10 {
             strTime = "\(min):0\(sec)"
@@ -105,11 +105,14 @@ class TimerView: UIView {
     }
     
     @objc private func updateTimer() {
+        currentTime -= 1
         setTimeToLabel(sec: currentTime)
         if(progressView.progress < 1) {
             progressView.progress += progressStep
         }
-        currentTime -= 1
+        if (currentTime <= 0){
+            stop()
+        }
     }
     
     // MARK: - Constraints
