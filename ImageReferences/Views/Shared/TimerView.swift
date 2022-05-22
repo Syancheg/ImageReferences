@@ -10,28 +10,53 @@ import UIKit
 
 class TimerView: UIView {
     
-    let padding = 15.0
-    let labelHeight = 60.0
-    let progressHeight = 10.0
+    // MARK: - Private properties
+
+    private let padding = 15.0
+    private let labelHeight = 60.0
+    private let progressHeight = 10.0
+    private let fontSize = 40.0
+    private var currentTime = 0
+    private var progressStep: Float = 0.0
+    private var progressView = UIProgressView()
+    private var timer: Timer?
+    private let label = UILabel()
     
-    let fullTime: Int = 0
-    var currentTime: Int = 0
-    var progress: Double = 0.0
-    var progressView = UIProgressView()
-    var timer: Timer?
-    let label = UILabel()
+    // MARK: - Properties
+    
+    var fullTime = 0 {
+        didSet {
+            setTimeToLabel(sec: fullTime)
+            currentTime = fullTime
+            setProgressStep()
+        }
+    }
+    
+    // MARK: - Initializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupTimer()
         setupView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupTimer()
         setupView()
     }
+    
+    // MARK: - Functions
+   
+    func start() {
+        setupTimer()
+    }
+    
+    func stop() {
+        if timer != nil {
+            timer!.invalidate()
+        }
+    }
+    
+    // MARK: - Setup Views
     
     private func setupView() {
         setupLabel()
@@ -41,35 +66,53 @@ class TimerView: UIView {
     
     private func setupLabel() {
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 40.0)
+        label.font = UIFont.systemFont(ofSize: fontSize)
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
     }
     
     private func setupProgressView() {
         progressView.translatesAutoresizingMaskIntoConstraints = false
-        progressView.progress = 0.34
         addSubview(progressView)
     }
     
+    // MARK: - Set Timer and Progress
+    
     private func setupTimer() {
-        self.label.text = "0:00"
-        
-//        self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [ weak self ] timer in
-//            guard let self = self else { return }
-//            guard self.progress < 1 else {
-//                timer.invalidate()
-//                return
-//            }
-//            let newProgress = self.progress + 0.05
-//            if self.progress >= 1 {
-////                self.stop()
-//                return
-//            }
-//            self.progress = newProgress
-//        })
-        print("timer")
+        timer = nil
+        timer = Timer.scheduledTimer(
+            timeInterval: 1.0,
+            target: self,
+            selector: #selector(updateTimer),
+            userInfo: nil,
+            repeats: true)
     }
+    
+    private func setTimeToLabel(sec: Int) {
+        let min = sec / 60  as Int
+        let sec = sec  % 60 as Int
+        var strTime: String
+        if sec < 10 {
+            strTime = "\(min):0\(sec)"
+        } else {
+            strTime = "\(min):\(sec)"
+        }
+        self.label.text = strTime
+    }
+    
+    private func setProgressStep() {
+        progressStep = 1.0 / Float(fullTime)
+    }
+    
+    @objc private func updateTimer() {
+        setTimeToLabel(sec: currentTime)
+        if(progressView.progress < 1) {
+            progressView.progress += progressStep
+        }
+        currentTime -= 1
+    }
+    
+    // MARK: - Constraints
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
@@ -85,7 +128,5 @@ class TimerView: UIView {
             
         ])
     }
-    
-    
     
 }
