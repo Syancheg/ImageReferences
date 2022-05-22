@@ -17,7 +17,9 @@ class ImageView: UIView {
         didSet {
             imageView.downloadImage(urlPath: self.imageUrl)
             if self.activity != nil {
-                self.activity!.stopAnimating()
+                DispatchQueue.main.async {
+                    self.activity!.stopAnimating()
+                }
             }
         }
     }

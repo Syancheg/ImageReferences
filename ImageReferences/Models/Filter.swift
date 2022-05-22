@@ -6,7 +6,8 @@
 //
 import Foundation
 
-struct Filter {
-    var id: Int
-    var name: String
+struct Filter: Decodable {
+    let id: Int
+    let name: String
+    let group_id: Int
 }

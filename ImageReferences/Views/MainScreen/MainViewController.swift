@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  ImageReferences
 //
 //  Created by Константин Кузнецов on 09.05.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainController: UIViewController {
+class MainViewController: UIViewController {
     
     private let presenter = MainPresenter()
     private var filterGroups: [FilterGroup] = []
@@ -62,12 +62,7 @@ class MainController: UIViewController {
     
     private func setupSelects() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
         view.addSubview(stackView)
-        for index in 1...4 {
-            let drop = DropdownView(frame: .zero, filterGroupId: index, filters: filterGroups[0].filters, delegate: presenter)
-            stackView.addArrangedSubview(drop)
-        }
     }
     
     private func setupButton() {
@@ -102,7 +97,7 @@ class MainController: UIViewController {
 
 }
 
-extension MainController: MainInputDelegate {
+extension MainViewController: MainInputDelegate {
     
     func setupUser(user: User) {
         self.user = user
@@ -110,6 +105,13 @@ extension MainController: MainInputDelegate {
     
     func setupFilters(with filterGroups: [FilterGroup]) {
         self.filterGroups = filterGroups
+        for (_, element) in self.filterGroups.enumerated() {
+            DispatchQueue.main.async { [self] in
+                let drop = DropdownView(frame: .zero, filterGroupId: element.id, filterButton: element.name, filters: element.filters, delegate: presenter)
+                self.stackView.addArrangedSubview(drop)
+            }
+        }
+        
     }
     
 }
