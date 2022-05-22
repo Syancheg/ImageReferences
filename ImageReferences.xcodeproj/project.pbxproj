@@ -12,7 +12,6 @@
 		A10E2C762829156E00CA0BB1 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C752829156E00CA0BB1 /* MainController.swift */; };
 		A10E2C7B2829157200CA0BB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10E2C7A2829157200CA0BB1 /* Assets.xcassets */; };
 		A10E2C7E2829157200CA0BB1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A10E2C7C2829157200CA0BB1 /* LaunchScreen.storyboard */; };
-		A10E2C8A28293ACC00CA0BB1 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C8928293ACC00CA0BB1 /* Filter.swift */; };
 		A10E2C8C28293BA400CA0BB1 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C8B28293BA400CA0BB1 /* MainPresenter.swift */; };
 		A10E2C8E28293C0D00CA0BB1 /* MainInputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C8D28293C0D00CA0BB1 /* MainInputDelegate.swift */; };
 		A10E2C9028293F7000CA0BB1 /* MainOutputDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2C8F28293F7000CA0BB1 /* MainOutputDelegate.swift */; };
@@ -27,6 +26,7 @@
 		A10E2CAB28394A5700CA0BB1 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CAA28394A5700CA0BB1 /* TimerView.swift */; };
 		A10E2CAD28395CDF00CA0BB1 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CAC28395CDF00CA0BB1 /* ImageView.swift */; };
 		A10E2CAF2839726400CA0BB1 /* DropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CAE2839726400CA0BB1 /* DropdownView.swift */; };
+		A10E2CB1283A473000CA0BB1 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CB0283A473000CA0BB1 /* Filter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +37,6 @@
 		A10E2C7A2829157200CA0BB1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A10E2C7D2829157200CA0BB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A10E2C7F2829157200CA0BB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A10E2C8928293ACC00CA0BB1 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		A10E2C8B28293BA400CA0BB1 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		A10E2C8D28293C0D00CA0BB1 /* MainInputDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInputDelegate.swift; sourceTree = "<group>"; };
 		A10E2C8F28293F7000CA0BB1 /* MainOutputDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOutputDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +51,7 @@
 		A10E2CAA28394A5700CA0BB1 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		A10E2CAC28395CDF00CA0BB1 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		A10E2CAE2839726400CA0BB1 /* DropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownView.swift; sourceTree = "<group>"; };
+		A10E2CB0283A473000CA0BB1 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +97,10 @@
 		A10E2C852829229600CA0BB1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A10E2C8928293ACC00CA0BB1 /* Filter.swift */,
 				A10E2C912829455B00CA0BB1 /* FilterGroup.swift */,
 				A10E2C9328294C9A00CA0BB1 /* User.swift */,
 				A10E2CA8283173DE00CA0BB1 /* Image.swift */,
+				A10E2CB0283A473000CA0BB1 /* Filter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -241,8 +241,8 @@
 				A10E2C9B2829800A00CA0BB1 /* LogoView.swift in Sources */,
 				A10E2C762829156E00CA0BB1 /* MainController.swift in Sources */,
 				A10E2C8E28293C0D00CA0BB1 /* MainInputDelegate.swift in Sources */,
-				A10E2C8A28293ACC00CA0BB1 /* Filter.swift in Sources */,
 				A10E2CAD28395CDF00CA0BB1 /* ImageView.swift in Sources */,
+				A10E2CB1283A473000CA0BB1 /* Filter.swift in Sources */,
 				A10E2CAB28394A5700CA0BB1 /* TimerView.swift in Sources */,
 				A10E2CA7283173CF00CA0BB1 /* ImagePresenter.swift in Sources */,
 				A10E2CA32831739900CA0BB1 /* ImageInputDelegate.swift in Sources */,

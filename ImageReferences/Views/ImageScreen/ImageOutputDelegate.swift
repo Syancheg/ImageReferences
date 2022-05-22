@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol ImageOutputDelegate: AnyObject {
+    func getImage(with filter: [Int:Int])
+}

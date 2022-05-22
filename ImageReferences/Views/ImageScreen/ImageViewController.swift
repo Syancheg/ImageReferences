@@ -9,14 +9,19 @@ import UIKit
 
 class ImageViewController: UIViewController {
     
-    
+    private let presenter = ImagePresenter()
+    weak private var imageOutputDelegate: ImageOutputDelegate?
     var currentFilters: [Int:Int] = [:]
-    var fullTime = 7
+    var fullTime = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupView()
+        presenter.setImageInputDelegate(imageInputDelegate: self)
+        self.imageOutputDelegate = presenter
+        guard self.imageOutputDelegate != nil else { return }
+        self.imageOutputDelegate!.getImage(with: self.currentFilters)
+        self.setupView()
     }
     
     var timerView: TimerView = {
@@ -85,6 +90,10 @@ class ImageViewController: UIViewController {
         ])
     }
     
-    
-    
+}
+
+extension ImageViewController: ImageInputDelegate {
+    func setupImage(url: String) {
+        imageView.imageUrl = url
+    }
 }
