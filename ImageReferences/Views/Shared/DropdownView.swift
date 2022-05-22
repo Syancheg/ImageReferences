@@ -127,7 +127,6 @@ extension DropdownView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.text = self.filters[indexPath.row].name
-        cell.textLabel?.textColor = Dropdown.textColor
         return cell
     }
     
