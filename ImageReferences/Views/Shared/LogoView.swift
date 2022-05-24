@@ -9,27 +9,26 @@ import UIKit
 
 class LogoView: UIView {
     
+    // MARK: - Private properties
     
-    var imageLogo: UIImageView = {
+    private let imagePadding = 10.0
+    private let circleSize = 100.0
+    private let logoSize = 60.0
+    
+    private var imageLogo: UIImageView = {
         let image = UIImage(named: "logo.png")
         let imageView = UIImageView(image: image)
         return imageView
     }()
     
-    var cirleView: UIView = {
+    private var cirleView: UIView = {
         let view = UIView()
-        let circlePath = UIBezierPath(
-            arcCenter: CGPoint(x: 25, y: 25),
-            radius: CGFloat(50),
-            startAngle: CGFloat(0),
-            endAngle: CGFloat(Double.pi * 2),
-            clockwise: true)
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = circlePath.cgPath
-        shapeLayer.fillColor = UIColor(red: 0.99, green: 0.65, blue: 0.29, alpha: 1.00).cgColor
-        view.layer.addSublayer(shapeLayer)
+        view.layer.cornerRadius = 50
+        view.backgroundColor = UIColor.circleLogo
         return view
     }()
+    
+    // MARK: - Initializations
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,9 +36,10 @@ class LogoView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupView()
+        fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Private Functions
     
     private func setupView() {
         imageLogo.translatesAutoresizingMaskIntoConstraints = false
@@ -49,17 +49,20 @@ class LogoView: UIView {
         setupConstraints()
     }
     
+    // MARK: - Constraints
+    
     private func setupConstraints(){
         NSLayoutConstraint.activate([
-            self.cirleView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            self.cirleView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            self.cirleView.widthAnchor.constraint(equalToConstant: 50.0),
-            self.cirleView.heightAnchor.constraint(equalToConstant: 50.0),
+            cirleView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            cirleView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            cirleView.widthAnchor.constraint(equalToConstant: circleSize),
+            cirleView.heightAnchor.constraint(equalToConstant: circleSize),
 
-            self.imageLogo.centerXAnchor.constraint(equalTo: self.cirleView.centerXAnchor),
-            self.imageLogo.centerYAnchor.constraint(equalTo: self.cirleView.centerYAnchor),
-            self.imageLogo.widthAnchor.constraint(equalTo: self.cirleView.widthAnchor, constant: 10),
-            self.imageLogo.heightAnchor.constraint(equalTo: self.cirleView.heightAnchor, constant: 10)
+            imageLogo.centerXAnchor.constraint(equalTo: cirleView.centerXAnchor),
+            imageLogo.centerYAnchor.constraint(equalTo: cirleView.centerYAnchor),
+            imageLogo.widthAnchor.constraint(equalToConstant: logoSize),
+            imageLogo.heightAnchor.constraint(equalToConstant: logoSize)
+
         ])
     }
     

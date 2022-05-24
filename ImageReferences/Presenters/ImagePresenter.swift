@@ -10,13 +10,12 @@ import UIKit
 
 class ImagePresenter {
     weak private var imageInputDelegate:  ImageInputDelegate?
-    private var image: Image = Image.testData
     
     func setImageInputDelegate(imageInputDelegate: ImageInputDelegate) {
         self.imageInputDelegate = imageInputDelegate
     }
     
-    func setupImage(with filter: [Int : Int]){
+    func setupImage(with filter: [String : Int]){
         let service = ApiService()
         service.getImage(with: filter) { image in
             self.imageInputDelegate?.setupImage(url: image.url)
@@ -27,7 +26,7 @@ class ImagePresenter {
 }
 
 extension ImagePresenter: ImageOutputDelegate {
-    func getImage(with filter: [Int : Int]) {
+    func getImage(with filter: [String : Int]) {
         self.setupImage(with: filter)
     }
 }

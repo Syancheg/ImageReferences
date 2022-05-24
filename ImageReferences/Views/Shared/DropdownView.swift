@@ -10,41 +10,44 @@ import UIKit
 
 class DropdownView: UIView {
     
-    var filterGroupId: Int = 0
-    var filters: [Filter] = []
-    var delegate: MainOutputDelegate?
+    // MARK: - Private properties
     
-    var button: UIButton = {
+    private var filterGroup: String = ""
+    private var filters: [Filter] = []
+    private var delegate: MainOutputDelegate?
+    private let padding = 15.0
+    private let buttonHeight = 50.0
+    private let heigthLine = 50.0
+    
+    private var button: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
         button.tintColor = .black
         button.setTitleColor(.black, for: .normal)
-        button.layer.cornerRadius = 5
+        button.cornerRadius()
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(red: 0.41, green: 0.54, blue: 1.00, alpha: 1.00).cgColor
+        button.layer.borderColor = UIColor.dropdownButtonBorder
         button.backgroundColor = .white
-        
         button.layer.shadowOffset = CGSize(width: 0, height: 0)
         button.layer.shadowRadius = 10
         button.layer.shadowOpacity = 0
-        button.layer.shadowColor = UIColor(red: 0.31, green: 0.45, blue: 0.97, alpha: 1.00).cgColor
-        
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.layer.shadowColor = UIColor.dropdownButtonShadow
         return button
     }()
     
-    var table: UITableView = {
+    private var table: UITableView = {
         let table = UITableView()
-        table.layer.cornerRadius = 15
+        table.layer.cornerRadius = 5
         table.layer.shadowOffset = CGSize(width: 5, height: 5)
         table.layer.shadowRadius = 20
         table.layer.shadowOpacity  = 0.3
-        table.layer.shadowColor = UIColor(red: 0.11, green: 0.18, blue: 0.37, alpha: 1.00).cgColor
+        table.layer.shadowColor = UIColor.dropdownTableShadow
         table.layer.borderWidth = 1
-        table.layer.borderColor = UIColor(red: 0.88, green: 0.89, blue: 0.90, alpha: 1.00).cgColor
-        table.layer.cornerRadius = 10
+        table.layer.borderColor = UIColor.dropdownTableBorder
         return table
     }()
+    
+    // MARK: - Initializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,25 +58,27 @@ class DropdownView: UIView {
         setupConstraints()
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupButton()
-        setupConstraints()
-    }
-    
-    convenience init(frame: CGRect, filterGroupId: Int, filterButton: String, filters: [Filter], delegate: MainOutputDelegate) {
+    convenience init(frame: CGRect, filterGroup: String, filterButton: String, filters: [Filter], delegate: MainOutputDelegate) {
         self.init(frame: frame)
-        self.button.setTitle(filterButton, for: .normal)
-        self.filterGroupId = filterGroupId
+        button.setTitle(filterButton, for: .normal)
+        self.filterGroup = filterGroup
         self.filters = filters
         self.delegate = delegate
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Private Functions
+    
     private func setupButton() {
-        
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         addSubview(button)
     }
+    
+    // MARK: - Actions
     
     private func buttonActive() {
         button.setImage(UIImage(systemName: "chevron.up"), for: .normal)
@@ -92,21 +97,23 @@ class DropdownView: UIView {
             return
         }
         buttonActive()
-        var y = self.frame.origin.y + self.frame.height
-        if (self.frame.origin.y > 200) {
-            y = self.frame.origin.y - 200
+        var y = frame.origin.y + frame.height
+        let height = Double(filters.count) * heigthLine
+        if (frame.origin.y > 200) {
+            y = frame.origin.y - height
         }
-        table.frame = CGRect(x: 15, y: y, width: bounds.width - 30, height: 200)
-        self.superview?.addSubview(table)
-        print(button.frame.origin.y)
+        table.frame = CGRect(x: 15, y: y, width: bounds.width - 30, height: height)
+        superview?.addSubview(table)
     }
+    
+    // MARK: - Setup Constraints
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            self.button.topAnchor.constraint(equalTo: topAnchor, constant: 15),
-            self.button.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
-            self.button.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
-            self.button.heightAnchor.constraint(equalToConstant: 50),
+            button.topAnchor.constraint(equalTo: topAnchor, constant: padding),
+            button.leftAnchor.constraint(equalTo: leftAnchor, constant: padding),
+            button.rightAnchor.constraint(equalTo: rightAnchor, constant: -padding),
+            button.heightAnchor.constraint(equalToConstant: buttonHeight),
             
         ])
     }
@@ -116,19 +123,19 @@ extension DropdownView: UITableViewDelegate, UITableViewDataSource {
 
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.filters.count
+        filters.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = self.filters[indexPath.row].name
+        cell.textLabel?.text = filters[indexPath.row].name
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.button.setTitle(filters[indexPath.row].name, for: .normal)
+        button.setTitle(filters[indexPath.row].name, for: .normal)
         buttonUnActive()
         table.removeFromSuperview()
-        delegate?.setFilter(with: [filterGroupId: filters[indexPath.row].id])
+        delegate?.setFilter(with: [filterGroup: filters[indexPath.row].id])
     }
 }

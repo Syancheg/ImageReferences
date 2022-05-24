@@ -10,8 +10,7 @@ import Foundation
 class MainPresenter {
     
     weak private var mainInputDelegate: MainInputDelegate?
-    private var filters = FilterGroup.testData
-    private var currentFilters: [Int:Int] = [:]
+    private var currentFilters: [String:Int] = [:]
     private var user = User.testData
     
     func setMainInputDelegate(mainInputDelegate: MainInputDelegate?) {
@@ -37,13 +36,13 @@ extension MainPresenter: MainOutputDelegate {
     }
     
     
-    var currentFilter: [Int : Int] {
+    var currentFilter: [String : Int] {
         get {
             return self.currentFilters
         }
     }
     
-    func setFilter(with index: [Int : Int]) {
+    func setFilter(with index: [String : Int]) {
         self.currentFilters = self.currentFilters.merging(index) { (_, new) in new }
     }
 

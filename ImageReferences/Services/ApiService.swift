@@ -9,11 +9,15 @@ import Foundation
 
 class ApiService {
     
-    private let url = "http://127.0.0.1:8000/api/"
-    let decoder = JSONDecoder()
+    // MARK: - Private properties
+    
+    private let url = "http://syancheg.xyz/api/"
+    private let decoder = JSONDecoder()
+    
+    // MARK: - Functions
     
     func getFilters(completion: @escaping ([FilterGroup]?) -> Void) {
-        let url = self.url + "filter"
+        let url = url + "filter"
         getRequest(url: url) { data in
             guard let data = data else { return }
             do {
@@ -24,9 +28,9 @@ class ApiService {
             }
         }
     }
-    
-    func getImage(with filter: [Int:Int], completion: @escaping (Image) -> Void) {
-        let url = self.url + "image"
+
+    func getImage(with filter: [String:Int], completion: @escaping (Image) -> Void) {
+        let url = url + "image"
         getRequest(url: url) { data in
             guard let data = data else { return }
             do {
@@ -37,6 +41,8 @@ class ApiService {
             }
         }
     }
+    
+    // MARK: - Private Function
     
     private func getRequest(url: String, completion: @escaping (Data?) -> Void ){
         let requestUrl = URL(string: url)!
