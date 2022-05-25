@@ -10,4 +10,5 @@ import UIKit
 
 protocol ImageInputDelegate: AnyObject {
     func setupImage(url: String)
+    func alertError()
 }

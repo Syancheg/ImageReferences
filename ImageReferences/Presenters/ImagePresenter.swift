@@ -17,8 +17,13 @@ class ImagePresenter {
     
     func setupImage(with filter: [String : Int]){
         let service = ApiService()
+        guard let delegate = imageInputDelegate else { return }
         service.getImage(with: filter) { image in
-            self.imageInputDelegate?.setupImage(url: image.url)
+            guard let image = image else {
+                delegate.alertError()
+                return
+            }
+            delegate.setupImage(url: image.url)
         }
     }
     
