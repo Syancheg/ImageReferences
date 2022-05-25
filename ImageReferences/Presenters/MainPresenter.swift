@@ -11,19 +11,23 @@ class MainPresenter {
     
     weak private var mainInputDelegate: MainInputDelegate?
     private var currentFilters: [String:Int] = [:]
+    private var time = 30
+    private let timers = [30, 60, 120, 180]
     private var user = User.testData
     
     func setMainInputDelegate(mainInputDelegate: MainInputDelegate?) {
         self.mainInputDelegate = mainInputDelegate
     }
     
-    private func loadTestData() {
+    private func loadData() {
         let service = ApiService()
         service.getFilters { filters in
             guard let filters = filters else { return }
             if let delegate = self.mainInputDelegate {
                 delegate.setupFilters(with: filters)
                 delegate.setupUser(user: self.user)
+                delegate.setupTimers(timers: self.timers)
+                delegate.stopActivity()
             }
         }
     }
@@ -31,19 +35,30 @@ class MainPresenter {
 }
 
 extension MainPresenter: MainOutputDelegate {
-    func setupData() {
-        self.loadTestData()
-    }
-    
     
     var currentFilter: [String : Int] {
         get {
-            return self.currentFilters
+            return currentFilters
         }
     }
     
+    var currentTime: Int {
+        get {
+            return time
+        }
+    }
+    
+    func setTime(sec: Int) {
+        time = sec
+    }
+    
+    
+    func setupData() {
+        self.loadData()
+    }
+    
     func setFilter(with index: [String : Int]) {
-        self.currentFilters = self.currentFilters.merging(index) { (_, new) in new }
+        currentFilters = currentFilters.merging(index) { (_, new) in new }
     }
 
 }
