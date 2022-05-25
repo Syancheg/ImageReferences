@@ -35,7 +35,7 @@ class ImageViewController: UIViewController {
         let button = UIButton()
         button.tintColor = .white
         button.cornerRadius()
-        button.backgroundColor = UIColor.butttonStart
+        button.backgroundColor = UIColor.buttonStart
         return button
     }()
     
@@ -79,7 +79,7 @@ class ImageViewController: UIViewController {
     
     @objc private func stopButtonAction() {
         button.setTitle(_textStart, for: .normal)
-        button.backgroundColor = UIColor.butttonStart
+        button.backgroundColor = UIColor.buttonStart
         button.removeTarget(nil, action: nil, for: .allEvents)
         button.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
         timerView.stop()
@@ -88,20 +88,21 @@ class ImageViewController: UIViewController {
     // MARK: - Constraints
     
     private func setupConstraints() {
+        let margins = view.layoutMarginsGuide
         NSLayoutConstraint.activate([
-            timerView.topAnchor.constraint(equalTo: view.topAnchor, constant: _headerPadding),
-            timerView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            timerView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            timerView.topAnchor.constraint(equalTo: margins.topAnchor),
+            timerView.leftAnchor.constraint(equalTo: margins.leftAnchor),
+            timerView.rightAnchor.constraint(equalTo: margins.rightAnchor),
             timerView.heightAnchor.constraint(equalToConstant: timerViewHeigth),
             
             imageView.topAnchor.constraint(equalTo: timerView.bottomAnchor),
-            imageView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            imageView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            imageView.leftAnchor.constraint(equalTo: margins.leftAnchor),
+            imageView.rightAnchor.constraint(equalTo: margins.rightAnchor),
             imageView.heightAnchor.constraint(equalToConstant: view.bounds.height / imageProportions),
             
-            button.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -_footerPadding),
-            button.leftAnchor.constraint(equalTo: view.leftAnchor, constant: _buttonPadding),
-            button.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -_buttonPadding),
+            button.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -_bottomPadding),
+            button.leftAnchor.constraint(equalTo: margins.leftAnchor),
+            button.rightAnchor.constraint(equalTo: margins.rightAnchor),
             button.heightAnchor.constraint(equalToConstant: _buttonHeight)
 
         ])

@@ -15,7 +15,7 @@ class DropdownView: UIView {
     private var filterGroup: String = ""
     private var filters: [Filter] = []
     private var delegate: MainOutputDelegate?
-    private let padding = 15.0
+    private let paddingTop = 30.0
     private let buttonHeight = 50.0
     private let heigthLine = 50.0
     
@@ -26,24 +26,20 @@ class DropdownView: UIView {
         button.setTitleColor(.black, for: .normal)
         button.cornerRadius()
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.dropdownButtonBorder
+        button.layer.borderColor = UIColor.dropdownButtonBorder.cgColor
         button.backgroundColor = .white
         button.layer.shadowOffset = CGSize(width: 0, height: 0)
         button.layer.shadowRadius = 10
         button.layer.shadowOpacity = 0
-        button.layer.shadowColor = UIColor.dropdownButtonShadow
+        button.layer.shadowColor = UIColor.dropdownButtonShadow.cgColor
         return button
     }()
     
     private var table: UITableView = {
         let table = UITableView()
         table.layer.cornerRadius = 5
-        table.layer.shadowOffset = CGSize(width: 5, height: 5)
-        table.layer.shadowRadius = 20
-        table.layer.shadowOpacity  = 0.3
-        table.layer.shadowColor = UIColor.dropdownTableShadow
         table.layer.borderWidth = 1
-        table.layer.borderColor = UIColor.dropdownTableBorder
+        table.layer.borderColor = UIColor.dropdownTableBorder.cgColor
         return table
     }()
     
@@ -99,10 +95,10 @@ class DropdownView: UIView {
         buttonActive()
         var y = frame.origin.y + frame.height
         let height = Double(filters.count) * heigthLine
-        if (frame.origin.y > 200) {
+        if (frame.origin.y > 150) {
             y = frame.origin.y - height
         }
-        table.frame = CGRect(x: 15, y: y, width: bounds.width - 30, height: height)
+        table.frame = CGRect(x: 0, y: y, width: bounds.width, height: height)
         superview?.addSubview(table)
     }
     
@@ -110,17 +106,15 @@ class DropdownView: UIView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: topAnchor, constant: padding),
-            button.leftAnchor.constraint(equalTo: leftAnchor, constant: padding),
-            button.rightAnchor.constraint(equalTo: rightAnchor, constant: -padding),
+            button.topAnchor.constraint(equalTo: topAnchor, constant: paddingTop),
+            button.leftAnchor.constraint(equalTo: leftAnchor),
+            button.rightAnchor.constraint(equalTo: rightAnchor),
             button.heightAnchor.constraint(equalToConstant: buttonHeight),
-            
         ])
     }
 }
 
 extension DropdownView: UITableViewDelegate, UITableViewDataSource {
-
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         filters.count
@@ -136,6 +130,7 @@ extension DropdownView: UITableViewDelegate, UITableViewDataSource {
         button.setTitle(filters[indexPath.row].name, for: .normal)
         buttonUnActive()
         table.removeFromSuperview()
-        delegate?.setFilter(with: [filterGroup: filters[indexPath.row].id])
+        guard let delegate = delegate else { return }
+        delegate.setFilter(with: [filterGroup: filters[indexPath.row].id])
     }
 }

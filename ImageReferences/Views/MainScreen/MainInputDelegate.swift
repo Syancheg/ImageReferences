@@ -10,5 +10,7 @@ import Foundation
 protocol MainInputDelegate: AnyObject {
     func setupUser(user: User)
     func setupFilters(with filterGruops: [FilterGroup])
+    func setupTimers(timers: [Int])
+    func stopActivity()
 }
  
