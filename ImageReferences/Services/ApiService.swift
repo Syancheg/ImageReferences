@@ -24,12 +24,12 @@ class ApiService {
                 let filters = try self.decoder.decode([FilterGroup].self, from: data)
                 completion(filters)
             } catch {
-                print(error)
+                completion(nil)
             }
         }
     }
 
-    func getImage(with filter: [String:Int], completion: @escaping (Image) -> Void) {
+    func getImage(with filter: [String:Int], completion: @escaping (Image?) -> Void) {
         let url = url + "image"
         getRequest(url: url) { data in
             guard let data = data else { return }
@@ -37,7 +37,7 @@ class ApiService {
                 let image = try self.decoder.decode(Image.self, from: data)
                 completion(image)
             } catch {
-                print(error)
+                completion(nil)
             }
         }
     }

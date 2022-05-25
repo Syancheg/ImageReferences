@@ -112,6 +112,16 @@ class ImageViewController: UIViewController {
 
 extension ImageViewController: ImageInputDelegate {
     
+    func alertError() {
+        DispatchQueue.main.async { [self] in
+            let alert = UIAlertController(title: _imageAlertTitle, message: _imageAlertMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            self.present(alert, animated: true, completion: nil)
+            button.isEnabled = false
+            button.backgroundColor = UIColor.buttonDisabled
+        }
+    }
+    
     func setupImage(url: String) {
         imageView.imageUrl = url
     }

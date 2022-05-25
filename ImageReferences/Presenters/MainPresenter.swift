@@ -21,14 +21,16 @@ class MainPresenter {
     
     private func loadData() {
         let service = ApiService()
+        guard let delegate = self.mainInputDelegate else { return }
         service.getFilters { filters in
-            guard let filters = filters else { return }
-            if let delegate = self.mainInputDelegate {
-                delegate.setupFilters(with: filters)
-                delegate.setupUser(user: self.user)
-                delegate.setupTimers(timers: self.timers)
-                delegate.stopActivity()
+            guard let filters = filters else {
+                delegate.alertError()
+                return
             }
+            delegate.setupFilters(with: filters)
+            delegate.setupUser(user: self.user)
+            delegate.setupTimers(timers: self.timers)
+            delegate.stopActivity()
         }
     }
     

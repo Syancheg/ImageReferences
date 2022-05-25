@@ -166,6 +166,15 @@ class MainViewController: UIViewController {
 
 extension MainViewController: MainInputDelegate {
     
+    func alertError() {
+        DispatchQueue.main.async { [self] in
+            guard let activity = self.activity else { return }
+            activity.stopAnimating()
+            let alert = UIAlertController(title: _mainAlertTitle, message: _mainAlertMessage, preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     func stopActivity() {
         DispatchQueue.main.async { [self] in
             guard let activity = self.activity else { return }
