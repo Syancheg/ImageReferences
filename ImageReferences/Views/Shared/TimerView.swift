@@ -5,7 +5,6 @@
 //  Created by Константин Кузнецов on 21.05.2022.
 //
 
-import Foundation
 import UIKit
 
 class TimerView: UIView {
@@ -119,15 +118,15 @@ class TimerView: UIView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            self.label.topAnchor.constraint(equalTo: self.topAnchor, constant: self.padding),
-            self.label.leftAnchor.constraint(equalTo: self.leftAnchor, constant: self.padding),
-            self.label.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -self.padding),
-            self.label.heightAnchor.constraint(equalToConstant: self.labelHeight),
+            label.topAnchor.constraint(equalTo: topAnchor, constant: padding),
+            label.leftAnchor.constraint(equalTo: leftAnchor, constant: padding),
+            label.rightAnchor.constraint(equalTo: rightAnchor, constant: -padding),
+            label.heightAnchor.constraint(equalToConstant: labelHeight),
             
-            self.progressView.topAnchor.constraint(equalTo: self.label.bottomAnchor, constant: 0),
-            self.progressView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: self.padding),
-            self.progressView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -self.padding),
-            self.progressView.heightAnchor.constraint(equalToConstant: self.progressHeight),
+            progressView.topAnchor.constraint(equalTo: label.bottomAnchor),
+            progressView.leftAnchor.constraint(equalTo: leftAnchor, constant: padding),
+            progressView.rightAnchor.constraint(equalTo: rightAnchor, constant: -padding),
+            progressView.heightAnchor.constraint(equalToConstant: progressHeight),
             
         ])
     }

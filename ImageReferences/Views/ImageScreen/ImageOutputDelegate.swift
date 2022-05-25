@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ImageOutputDelegate: AnyObject {
-    func getImage(with filter: [Int:Int])
+    func getImage(with filter: [String:Int])
 }

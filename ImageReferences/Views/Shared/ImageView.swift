@@ -10,8 +10,7 @@ import UIKit
 
 class ImageView: UIView {
     
-    private var activity: UIActivityIndicatorView?
-    private var gestureRecognizer: UIPinchGestureRecognizer?
+    // MARK: - Properties
     
     var imageUrl: String = "" {
         didSet {
@@ -24,11 +23,18 @@ class ImageView: UIView {
         }
     }
     
-    var imageView: UIImageView = {
+    // MARK: - Private properties
+    
+    private var activity: UIActivityIndicatorView?
+    private var gestureRecognizer: UIPinchGestureRecognizer?
+    
+    private var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
+    
+    // MARK: - Initializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,44 +42,46 @@ class ImageView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupView()
+        fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Setup Views
     
     private func setupView() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(imageView)
-        setupConstraints()
         setupActivity()
+        setupConstraints()
     }
     
     private func setupActivity() {
         activity = UIActivityIndicatorView(style: .large)
-        addSubview(activity!)
-        activity!.startAnimating()
+        guard let activity = activity else { return }
+        imageView.addSubview(activity)
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        activity.startAnimating()
     }
+    
+    // MARK: - Setup Constraints
     
     private func setupConstraints(){
         NSLayoutConstraint.activate([
-            self.imageView.topAnchor.constraint(equalTo: self.topAnchor),
-            self.imageView.widthAnchor.constraint(equalTo: self.widthAnchor),
-            self.imageView.heightAnchor.constraint(equalTo: self.heightAnchor),
-            self.imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            imageView.topAnchor.constraint(equalTo: topAnchor),
+            imageView.leftAnchor.constraint(equalTo: leftAnchor),
+            imageView.rightAnchor.constraint(equalTo: rightAnchor),
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+        
+        guard let activity = activity else { return }
+        
+        NSLayoutConstraint.activate([
+            activity.topAnchor.constraint(equalTo: imageView.topAnchor),
+            activity.leftAnchor.constraint(equalTo: imageView.leftAnchor),
+            activity.rightAnchor.constraint(equalTo: imageView.rightAnchor),
+            activity.bottomAnchor.constraint(equalTo: imageView.bottomAnchor)
+        ])
+        
     }
-    
-    private func setupGestureRecognizer() {
-        gestureRecognizer = UIPinchGestureRecognizer(target: self.imageView, action: #selector(ImageView.imageZoom))
-        self.imageView.isUserInteractionEnabled = true
-        self.imageView.addGestureRecognizer(gestureRecognizer!)
-    }
-    
-    @objc func imageZoom() {
-        print("zoooom")
-    }
-    
-    
-    
 }
 
 extension UIImageView{
@@ -91,7 +99,7 @@ extension UIImageView{
             }
             task.resume()
         } else {
-            self.image = UIImage(systemName: "photo")!
+            self.image = UIImage(systemName: "photo.fill")
         }
     }
     

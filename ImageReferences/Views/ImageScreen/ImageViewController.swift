@@ -9,46 +9,57 @@ import UIKit
 
 class ImageViewController: UIViewController {
     
+    // MARK: - Properties
+    
+    var currentFilters: [String:Int] = [:]
+    var fullTime = 0
+    
+    // MARK: - Private properties
+    
+    private let timerViewHeigth = 100.0
+    private let imageProportions = 1.6
     private let presenter = ImagePresenter()
     weak private var imageOutputDelegate: ImageOutputDelegate?
-    var currentFilters: [Int:Int] = [:]
-    var fullTime = 0
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        presenter.setImageInputDelegate(imageInputDelegate: self)
-        self.imageOutputDelegate = presenter
-        guard self.imageOutputDelegate != nil else { return }
-        self.imageOutputDelegate!.getImage(with: self.currentFilters)
-        self.setupView()
-    }
     
-    var timerView: TimerView = {
+    private var timerView: TimerView = {
         let timer = TimerView()
         return timer
     }()
     
-    var imageView: ImageView  = {
+    private var imageView: ImageView  = {
         let imageView = ImageView()
         return imageView
     }()
     
-    var button: UIButton =  {
+    private var button: UIButton =  {
         let button = UIButton()
-        button.setTitle("Начать", for: .normal)
         button.tintColor = .white
-        button.layer.cornerRadius = 5
-        button.backgroundColor = UIColor(red: 0.03, green: 0.70, blue: 0.58, alpha: 1.00)
-        button.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
+        button.cornerRadius()
+        button.backgroundColor = UIColor.butttonStart
         return button
     }()
+    
+    // MARK: - Life Circle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        presenter.setImageInputDelegate(imageInputDelegate: self)
+        imageOutputDelegate = presenter
+        guard imageOutputDelegate != nil else { return }
+        imageOutputDelegate!.getImage(with: self.currentFilters)
+        setupView()
+    }
+    
+    // MARK: - Private Functions
 
     
     private func setupView() {
         imageView.translatesAutoresizingMaskIntoConstraints  = false
         timerView.translatesAutoresizingMaskIntoConstraints = false
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
+        button.setTitle(_textStart, for: .normal)
         view.addSubview(timerView)
         view.addSubview(imageView)
         view.addSubview(button)
@@ -56,36 +67,42 @@ class ImageViewController: UIViewController {
         timerView.fullTime = fullTime
     }
     
-    @objc func startButtonAction() {
-        button.setTitle("Остановить", for: .normal)
-        button.backgroundColor = UIColor(red: 1.00, green: 0.35, blue: 0.35, alpha: 1.00)
+    // MARK: - Actions
+    
+    @objc private func startButtonAction() {
+        button.setTitle(_textStop, for: .normal)
+        button.backgroundColor = UIColor.buttonStop
         button.removeTarget(nil, action: nil, for: .allEvents)
         button.addTarget(self, action: #selector(stopButtonAction), for: .touchUpInside)
         timerView.start()
     }
     
-    @objc func stopButtonAction() {
-        button.setTitle("Начать", for: .normal)
-        button.backgroundColor = UIColor(red: 0.03, green: 0.70, blue: 0.58, alpha: 1.00)
+    @objc private func stopButtonAction() {
+        button.setTitle(_textStart, for: .normal)
+        button.backgroundColor = UIColor.butttonStart
         button.removeTarget(nil, action: nil, for: .allEvents)
         button.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
         timerView.stop()
     }
     
+    // MARK: - Constraints
+    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            self.timerView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 60),
-            self.timerView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            self.timerView.heightAnchor.constraint(equalToConstant: 100.0),
+            timerView.topAnchor.constraint(equalTo: view.topAnchor, constant: _headerPadding),
+            timerView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            timerView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            timerView.heightAnchor.constraint(equalToConstant: timerViewHeigth),
             
-            self.imageView.topAnchor.constraint(equalTo: self.timerView.bottomAnchor),
-            self.imageView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            self.imageView.heightAnchor.constraint(equalToConstant: self.view.bounds.height / 1.6),
+            imageView.topAnchor.constraint(equalTo: timerView.bottomAnchor),
+            imageView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            imageView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            imageView.heightAnchor.constraint(equalToConstant: view.bounds.height / imageProportions),
             
-            self.button.topAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -80),
-            self.button.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 30),
-            self.button.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -30),
-            self.button.heightAnchor.constraint(equalToConstant: 50)
+            button.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -_footerPadding),
+            button.leftAnchor.constraint(equalTo: view.leftAnchor, constant: _buttonPadding),
+            button.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -_buttonPadding),
+            button.heightAnchor.constraint(equalToConstant: _buttonHeight)
 
         ])
     }
@@ -93,6 +110,7 @@ class ImageViewController: UIViewController {
 }
 
 extension ImageViewController: ImageInputDelegate {
+    
     func setupImage(url: String) {
         imageView.imageUrl = url
     }
