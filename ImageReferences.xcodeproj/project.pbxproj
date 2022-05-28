@@ -30,6 +30,7 @@
 		A10E2CB4283A789300CA0BB1 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CB3283A789300CA0BB1 /* ApiService.swift */; };
 		A10E2CB7283D5F4200CA0BB1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CB6283D5F4200CA0BB1 /* UIColor+Extension.swift */; };
 		A10E2CB9283D64C600CA0BB1 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CB8283D64C600CA0BB1 /* UIButton+Extension.swift */; };
+		A163C83728427D9D00A2C0F6 /* DropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A163C83628427D9D00A2C0F6 /* DropdownTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		A10E2CB3283A789300CA0BB1 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		A10E2CB6283D5F4200CA0BB1 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		A10E2CB8283D64C600CA0BB1 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		A163C83628427D9D00A2C0F6 /* DropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				A10E2CAA28394A5700CA0BB1 /* TimerView.swift */,
 				A10E2CAC28395CDF00CA0BB1 /* ImageView.swift */,
 				A10E2CAE2839726400CA0BB1 /* DropdownView.swift */,
+				A163C83628427D9D00A2C0F6 /* DropdownTableViewCell.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				A10E2CA12831738200CA0BB1 /* ImageViewController.swift in Sources */,
 				A10E2C922829455B00CA0BB1 /* FilterGroup.swift in Sources */,
 				A10E2CB7283D5F4200CA0BB1 /* UIColor+Extension.swift in Sources */,
+				A163C83728427D9D00A2C0F6 /* DropdownTableViewCell.swift in Sources */,
 				A10E2CB9283D64C600CA0BB1 /* UIButton+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

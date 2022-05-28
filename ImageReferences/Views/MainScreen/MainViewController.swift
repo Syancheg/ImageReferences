@@ -14,7 +14,7 @@ class MainViewController: UIViewController {
     private let logoHeight = 100.0
     private let buttonHeigth = 50.0
     private let bottomPadding = 15.0
-    private let filterViewProportions = 2.0
+    private let stackViewHeigth = 330.0
     
     private let presenter = MainPresenter()
     private var filterGroups: [FilterGroup] = []
@@ -119,7 +119,7 @@ class MainViewController: UIViewController {
             stackView.topAnchor.constraint(equalTo: logoView.bottomAnchor),
             stackView.leftAnchor.constraint(equalTo: margins.leftAnchor),
             stackView.rightAnchor.constraint(equalTo: margins.rightAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: view.bounds.height / filterViewProportions),
+            stackView.heightAnchor.constraint(equalToConstant: stackViewHeigth),
             
             timerStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: bottomPadding),
             timerStackView.leftAnchor.constraint(equalTo: margins.leftAnchor),
