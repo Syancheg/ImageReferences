@@ -11,14 +11,13 @@ class ApiService {
     
     // MARK: - Private properties
     
-    private let url = "http://syancheg.xyz/api/"
     private let decoder = JSONDecoder()
     
     // MARK: - Functions
     
     func getFilters(completion: @escaping ([FilterGroup]?) -> Void) {
-        let url = url + "filter"
-        getRequest(url: url, parameters: [:]) { data in
+        let query = "filter"
+        getRequest(query: query, parameters: [:]) { data in
             guard let data = data else { return }
             do {
                 let filters = try self.decoder.decode([FilterGroup].self, from: data)
@@ -30,8 +29,8 @@ class ApiService {
     }
 
     func getImage(with filter: [String:Int], completion: @escaping (Image?) -> Void) {
-        let url = url + "image"
-        getRequest(url: url, parameters: filter) { data in
+        let query = "image"
+        getRequest(query: query, parameters: filter) { data in
             guard let data = data else { return }
             do {
                 let image = try self.decoder.decode(Image.self, from: data)
@@ -44,30 +43,20 @@ class ApiService {
     
     // MARK: - Private Function
     
-    private func getRequest(url: String, parameters: [String:Int], completion: @escaping (Data?) -> Void ){
-        let url = setupQueryParameners(url: url, parameters: parameters)
-        guard let requestUrl = URL(string: url) else { return }
-        let task = URLSession.shared.dataTask(with: requestUrl) {(data, response, error) in
+    private func getRequest(query: String, parameters: [String:Int], completion: @escaping (Data?) -> Void ){
+        var components = URLComponents()
+        components.scheme = "http"
+        components.host = "syancheg.xyz"
+        components.path = "/api/\(query)"
+        components.queryItems = parameters.map { (key, value) in
+            return URLQueryItem(name: key, value: String(value))
+        }
+        guard let url = components.url else { return }
+        let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
             guard let data = data else { return }
             completion(data)
         }
         task.resume()
-    }
-    
-    private func setupQueryParameners(url: String, parameters: [String:Int]) -> String {
-        var url = url
-        if parameters != [:] {
-            url += "?"
-            var index = 1
-            for (code, id) in parameters {
-                url += "\(code)=\(id)"
-                if (index < parameters.count) {
-                    url += "&"
-                }
-                index += 1
-            }
-        }
-        return url
     }
     
 }
