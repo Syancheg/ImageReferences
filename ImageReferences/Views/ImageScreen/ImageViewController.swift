@@ -18,6 +18,8 @@ class ImageViewController: UIViewController {
     
     private let timerViewHeigth = 100.0
     private let imageProportions = 1.6
+    private let buttonHeigth = 50.0
+    private let paddingBottom = 15.0
     private let presenter = ImagePresenter()
     weak private var imageOutputDelegate: ImageOutputDelegate?
     
@@ -59,7 +61,7 @@ class ImageViewController: UIViewController {
         timerView.translatesAutoresizingMaskIntoConstraints = false
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
-        button.setTitle(_textStart, for: .normal)
+        button.setTitle("Начать", for: .normal)
         view.addSubview(timerView)
         view.addSubview(imageView)
         view.addSubview(button)
@@ -71,7 +73,7 @@ class ImageViewController: UIViewController {
     // MARK: - Actions
     
     @objc private func startButtonAction() {
-        button.setTitle(_textStop, for: .normal)
+        button.setTitle("Остановить", for: .normal)
         button.backgroundColor = UIColor.buttonStop
         button.removeTarget(nil, action: nil, for: .allEvents)
         button.addTarget(self, action: #selector(stopButtonAction), for: .touchUpInside)
@@ -79,7 +81,7 @@ class ImageViewController: UIViewController {
     }
     
     @objc private func stopButtonAction() {
-        button.setTitle(_textStart, for: .normal)
+        button.setTitle("Начать", for: .normal)
         button.backgroundColor = UIColor.buttonStart
         button.removeTarget(nil, action: nil, for: .allEvents)
         button.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
@@ -101,10 +103,10 @@ class ImageViewController: UIViewController {
             imageView.rightAnchor.constraint(equalTo: margins.rightAnchor),
             imageView.heightAnchor.constraint(equalToConstant: view.bounds.height / imageProportions),
             
-            button.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -_bottomPadding),
+            button.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -paddingBottom),
             button.leftAnchor.constraint(equalTo: margins.leftAnchor),
             button.rightAnchor.constraint(equalTo: margins.rightAnchor),
-            button.heightAnchor.constraint(equalToConstant: _buttonHeight)
+            button.heightAnchor.constraint(equalToConstant: buttonHeigth)
 
         ])
     }
@@ -115,7 +117,10 @@ extension ImageViewController: ImageInputDelegate {
     
     func alertError() {
         DispatchQueue.main.async { [self] in
-            let alert = UIAlertController(title: _imageAlertTitle, message: _imageAlertMessage, preferredStyle: .alert)
+            let alert = UIAlertController(
+                title: "Sorry(",
+                message: "С такими фильтрами картинок пока нет, но они будут позже)",
+                preferredStyle: .alert)
             let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
                 guard let navigationController = self.navigationController else { return }
                 navigationController.popToRootViewController(animated: true)

@@ -12,6 +12,8 @@ class MainViewController: UIViewController {
     // MARK: - Private properties
     
     private let logoHeight = 100.0
+    private let buttonHeigth = 50.0
+    private let bottomPadding = 15.0
     private let filterViewProportions = 2.0
     
     private let presenter = MainPresenter()
@@ -43,10 +45,11 @@ class MainViewController: UIViewController {
     
     private var button: UIButton =  {
         let button = UIButton()
-        button.setTitle(_textStart, for: .normal)
+        button.setTitle("Начать", for: .normal)
         button.tintColor = .white
         button.cornerRadius()
-        button.backgroundColor = UIColor.buttonStart
+        button.isEnabled = false
+        button.backgroundColor = UIColor.buttonDisabled
         return button
     }()
     
@@ -54,8 +57,8 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = _textMainTitle
-        presenter.setMainInputDelegate(mainInputDelegate: self)
+        title = "Выбор категории"
+        presenter.mainInputDelegate = self
         mainOutputDelegate = presenter
         guard let mainOutputDelegate = mainOutputDelegate else { return }
         mainOutputDelegate.setupData()
@@ -118,15 +121,15 @@ class MainViewController: UIViewController {
             stackView.rightAnchor.constraint(equalTo: margins.rightAnchor),
             stackView.heightAnchor.constraint(equalToConstant: view.bounds.height / filterViewProportions),
             
-            timerStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: _bottomPadding),
+            timerStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: bottomPadding),
             timerStackView.leftAnchor.constraint(equalTo: margins.leftAnchor),
             timerStackView.rightAnchor.constraint(equalTo: margins.rightAnchor),
-            timerStackView.heightAnchor.constraint(equalToConstant: _buttonHeight),
+            timerStackView.heightAnchor.constraint(equalToConstant: buttonHeigth),
             
-            button.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -_bottomPadding),
+            button.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -bottomPadding),
             button.leftAnchor.constraint(equalTo: margins.leftAnchor),
             button.rightAnchor.constraint(equalTo: margins.rightAnchor),
-            button.heightAnchor.constraint(equalToConstant: _buttonHeight)
+            button.heightAnchor.constraint(equalToConstant: buttonHeigth)
         ])
         
         guard let activity = activity else { return }
@@ -165,12 +168,22 @@ class MainViewController: UIViewController {
 }
 
 extension MainViewController: MainInputDelegate {
+    func activateButton() {
+        button.isEnabled = true
+        button.backgroundColor = UIColor.buttonStart
+        
+    }
+    
     
     func alertError() {
         DispatchQueue.main.async { [self] in
             guard let activity = self.activity else { return }
             activity.stopAnimating()
-            let alert = UIAlertController(title: _mainAlertTitle, message: _mainAlertMessage, preferredStyle: .alert)
+            let alert = UIAlertController(
+                title: "Ошибка сети!",
+                message: "В данный момент приложение не может продолжить свою работу",
+                preferredStyle: .alert
+            )
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -189,13 +202,13 @@ extension MainViewController: MainInputDelegate {
                 button.setTitle(String(time), for: .normal)
                 button.setTitleColor(.black, for: .normal)
                 button.layer.borderWidth = 1
-                button.layer.cornerRadius = _buttonHeight / 2.0
+                button.layer.cornerRadius = 50.0 / 2.0
                 button.layer.borderColor = UIColor.dropdownButtonBorder.cgColor
                 button.tag = time
                 button.addTarget(self, action: #selector(timerButtonAction), for: .touchUpInside)
                 NSLayoutConstraint.activate([
-                    button.heightAnchor.constraint(equalToConstant: _buttonHeight),
-                    button.widthAnchor.constraint(equalToConstant: _buttonHeight),
+                    button.heightAnchor.constraint(equalToConstant: buttonHeigth),
+                    button.widthAnchor.constraint(equalToConstant: buttonHeigth),
                 ])
                 self.timerButtons.append(button)
                 self.timerStackView.addArrangedSubview(button)
@@ -213,7 +226,12 @@ extension MainViewController: MainInputDelegate {
         self.filterGroups = filterGroups
         for element in filterGroups {
             DispatchQueue.main.async { [self] in
-                let drop = DropdownView(frame: .zero, filterGroup: element.code, filterButton: element.name, filters: element.filters, delegate: presenter)
+                let drop = DropdownView(
+                    frame: .zero,
+                    filterGroup: element.code,
+                    filterButton: element.name,
+                    filters: element.filters,
+                    delegate: presenter)
                 self.stackView.addArrangedSubview(drop)
             }
         }
