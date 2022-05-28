@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol DropdownOutputProtocol: AnyObject {
-    
-}
-
 class DropdownView: UIView {
     
     // MARK: - Private properties
