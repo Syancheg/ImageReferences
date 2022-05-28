@@ -116,7 +116,11 @@ extension ImageViewController: ImageInputDelegate {
     func alertError() {
         DispatchQueue.main.async { [self] in
             let alert = UIAlertController(title: _imageAlertTitle, message: _imageAlertMessage, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                guard let navigationController = self.navigationController else { return }
+                navigationController.popToRootViewController(animated: true)
+            }
+            alert.addAction(cancel)
             self.present(alert, animated: true, completion: nil)
             button.isEnabled = false
             button.backgroundColor = UIColor.buttonDisabled
