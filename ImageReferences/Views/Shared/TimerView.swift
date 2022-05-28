@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TimerOutputDelegate: AnyObject {
+    func showAlertTimer()
+}
+
 class TimerView: UIView {
     
     // MARK: - Private properties
@@ -22,6 +26,8 @@ class TimerView: UIView {
     private let label = UILabel()
     
     // MARK: - Properties
+    
+    var delegate: TimerOutputDelegate?
     
     var fullTime = 0 {
         didSet {
@@ -111,6 +117,8 @@ class TimerView: UIView {
         }
         if (currentTime <= 0){
             stop()
+            guard let delegate = delegate else { return }
+            delegate.showAlertTimer()
         }
     }
     

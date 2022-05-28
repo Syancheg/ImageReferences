@@ -65,6 +65,7 @@ class ImageViewController: UIViewController {
         view.addSubview(button)
         setupConstraints()
         timerView.fullTime = fullTime
+        timerView.delegate = self
     }
     
     // MARK: - Actions
@@ -124,5 +125,15 @@ extension ImageViewController: ImageInputDelegate {
     
     func setupImage(url: String) {
         imageView.imageUrl = url
+    }
+}
+
+extension ImageViewController: TimerOutputDelegate {
+    func showAlertTimer() {
+        let alert = UIAlertController(title: "Время вышло", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(alert, animated: true, completion: nil)
+        button.isEnabled = false
+        button.backgroundColor = UIColor.buttonDisabled
     }
 }
