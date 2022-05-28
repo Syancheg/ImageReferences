@@ -5,7 +5,6 @@
 //  Created by Константин Кузнецов on 21.05.2022.
 //
 
-import Foundation
 import UIKit
 
 class ImageView: UIView {
@@ -48,6 +47,10 @@ class ImageView: UIView {
     // MARK: - Setup Views
     
     private func setupView() {
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoomImage))
+        clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(pinchGesture)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(imageView)
         setupActivity()
@@ -60,6 +63,17 @@ class ImageView: UIView {
         imageView.addSubview(activity)
         activity.translatesAutoresizingMaskIntoConstraints = false
         activity.startAnimating()
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func zoomImage(recognizer: UIPinchGestureRecognizer) {
+        guard let view = recognizer.view else { return }
+        view.transform = view.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
+        if frame.width > view.frame.width {
+            view.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
+        }
+        recognizer.scale = 1.0
     }
     
     // MARK: - Setup Constraints
