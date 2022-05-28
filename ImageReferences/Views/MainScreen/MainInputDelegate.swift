@@ -13,5 +13,6 @@ protocol MainInputDelegate: AnyObject {
     func setupTimers(timers: [Int])
     func stopActivity()
     func alertError()
+    func activateButton()
 }
  

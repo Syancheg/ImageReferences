@@ -9,15 +9,12 @@ import Foundation
 
 class MainPresenter {
     
-    weak private var mainInputDelegate: MainInputDelegate?
+    weak var mainInputDelegate: MainInputDelegate?
     private var currentFilters: [String:Int] = [:]
+    private var countFullFulters = 0
     private var time = 30
     private let timers = [30, 60, 120, 180]
     private var user = User.testData
-    
-    func setMainInputDelegate(mainInputDelegate: MainInputDelegate?) {
-        self.mainInputDelegate = mainInputDelegate
-    }
     
     private func loadData() {
         let service = ApiService()
@@ -27,6 +24,7 @@ class MainPresenter {
                 delegate.alertError()
                 return
             }
+            self.countFullFulters = filters.count
             delegate.setupFilters(with: filters)
             delegate.setupUser(user: self.user)
             delegate.setupTimers(timers: self.timers)
@@ -54,13 +52,16 @@ extension MainPresenter: MainOutputDelegate {
         time = sec
     }
     
-    
     func setupData() {
         self.loadData()
     }
     
     func setFilter(with index: [String : Int]) {
         currentFilters = currentFilters.merging(index) { (_, new) in new }
+        if countFullFulters == currentFilters.count {
+            guard let delegate = mainInputDelegate else { return }
+            delegate.activateButton()
+        }
     }
 
 }
