@@ -12,8 +12,8 @@ class LogoView: UIView {
     // MARK: - Private properties
     
     private let imagePadding = 10.0
-    private let circleSize = 100.0
-    private let logoSize = 60.0
+    private let circleSize = 120.0
+    private let logoSize = 80.0
     
     private var imageLogo: UIImageView = {
         let image = UIImage(named: "logo.png")
@@ -23,7 +23,7 @@ class LogoView: UIView {
     
     private var cirleView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 50
+        view.layer.cornerRadius = 60
         view.backgroundColor = UIColor.circleLogo
         return view
     }()

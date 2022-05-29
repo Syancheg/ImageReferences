@@ -18,16 +18,17 @@ class DropdownView: UIView {
     private let paddingTop = 30.0
     private let buttonHeight = 50.0
     private let heigthLine = 45.0
+    private let animationDuration = 0.3
     
     private var button: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-        button.tintColor = .black
-        button.setTitleColor(.black, for: .normal)
+        button.tintColor = UIColor(named:"fontColor")
+        button.setTitleColor(UIColor(named:"fontColor"), for: .normal)
         button.cornerRadius()
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.dropdownButtonBorder.cgColor
-        button.backgroundColor = .white
+        button.backgroundColor = UIColor.systemBackground
         button.layer.shadowOffset = CGSize(width: 0, height: 0)
         button.layer.shadowRadius = 10
         button.layer.shadowOpacity = 0
@@ -83,17 +84,7 @@ class DropdownView: UIView {
         addSubview(button)
     }
     
-    // MARK: - Actions
-    
-    private func buttonActive() {
-        button.setImage(UIImage(systemName: "chevron.up"), for: .normal)
-        button.layer.shadowOpacity = 0.5
-    }
-    
-    private func buttonUnActive() {
-        button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-        button.layer.shadowOpacity = 0
-    }
+    // MARK: - Overlay
     
     private func setupOverlay() {
         guard let superview = superview else { return }
@@ -113,20 +104,32 @@ class DropdownView: UIView {
         }
         guard let superview = superview else { return }
         superview.addSubview(overlayView)
-        UIView.animate(withDuration: 0.3) {
-            self.overlayView.layer.opacity = 0.3
+        UIView.animate(withDuration: animationDuration) {
+            self.overlayView.layer.opacity = 0.7
         }
     }
     
     private func deleteOverlay() {
         if overlayView.superview != nil {
             UIView.animate(
-                withDuration: 0.3) {
+                withDuration: animationDuration) {
                     self.overlayView.layer.opacity = 0.0
                 } completion: { stop in
                     self.overlayView.removeFromSuperview()
                 }
         }
+    }
+    
+    // MARK: - Actions
+    
+    private func buttonActive() {
+        button.setImage(UIImage(systemName: "chevron.up"), for: .normal)
+        button.layer.shadowOpacity = 0.5
+    }
+    
+    private func buttonUnActive() {
+        button.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        button.layer.shadowOpacity = 0
     }
     
     @objc private func buttonAction() {
@@ -148,32 +151,33 @@ class DropdownView: UIView {
         guard let superview = superview else { return }
         var y = frame.origin.y
         tableHeigth = Double(filters.count) * heigthLine
-        if frame.origin.y < 150 {
+        if frame.origin.y < superview.frame.height / 2 {
             y += frame.height
             table.frame = CGRect(x: 0, y: y, width: bounds.width, height: 0)
         } else {
-            y += paddingTop - 7
+            y += paddingTop - 5
             table.frame = CGRect(x: 0, y: y, width: bounds.width, height: 0)
             y -= self.tableHeigth
             
         }
         viewOverlay()
         superview.addSubview(table)
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: animationDuration) {
             self.table.frame = CGRect(x: 0, y: y, width: self.bounds.width, height: self.tableHeigth)
         }
         
     }
     
     func closeAnimation() {
+        guard let superview = superview else { return }
         var y = frame.origin.y
-        if frame.origin.y < 150 {
+        if frame.origin.y < superview.frame.height / 2 {
             y += frame.height
         } else {
-            y += paddingTop - 7
+            y += paddingTop - 5
         }
         deleteOverlay()
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: animationDuration) {
             self.table.frame = CGRect(x: 0, y: y, width: self.bounds.width, height: 0)
         } completion: { stop in
             self.table.removeFromSuperview()
