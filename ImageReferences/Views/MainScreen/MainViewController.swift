@@ -53,6 +53,16 @@ class MainViewController: UIViewController {
         return button
     }()
     
+    // MARK: - Override properties
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
     // MARK: - Life Circle
     
     override func viewDidLoad() {

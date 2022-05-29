@@ -30,6 +30,7 @@
 		A10E2CB4283A789300CA0BB1 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CB3283A789300CA0BB1 /* ApiService.swift */; };
 		A10E2CB7283D5F4200CA0BB1 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CB6283D5F4200CA0BB1 /* UIColor+Extension.swift */; };
 		A10E2CB9283D64C600CA0BB1 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E2CB8283D64C600CA0BB1 /* UIButton+Extension.swift */; };
+		A11A36972843BA6D00E6F2A1 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A36962843BA6D00E6F2A1 /* UINavigationController+Extension.swift */; };
 		A163C83728427D9D00A2C0F6 /* DropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A163C83628427D9D00A2C0F6 /* DropdownTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		A10E2CB3283A789300CA0BB1 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		A10E2CB6283D5F4200CA0BB1 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		A10E2CB8283D64C600CA0BB1 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		A11A36962843BA6D00E6F2A1 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
 		A163C83628427D9D00A2C0F6 /* DropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,6 +191,7 @@
 			children = (
 				A10E2CB6283D5F4200CA0BB1 /* UIColor+Extension.swift */,
 				A10E2CB8283D64C600CA0BB1 /* UIButton+Extension.swift */,
+				A11A36962843BA6D00E6F2A1 /* UINavigationController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				A10E2CB4283A789300CA0BB1 /* ApiService.swift in Sources */,
 				A10E2C722829156E00CA0BB1 /* AppDelegate.swift in Sources */,
 				A10E2C742829156E00CA0BB1 /* SceneDelegate.swift in Sources */,
+				A11A36972843BA6D00E6F2A1 /* UINavigationController+Extension.swift in Sources */,
 				A10E2CA12831738200CA0BB1 /* ImageViewController.swift in Sources */,
 				A10E2C922829455B00CA0BB1 /* FilterGroup.swift in Sources */,
 				A10E2CB7283D5F4200CA0BB1 /* UIColor+Extension.swift in Sources */,
