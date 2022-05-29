@@ -46,12 +46,22 @@ class MainViewController: UIViewController {
     private var button: UIButton =  {
         let button = UIButton()
         button.setTitle("Начать", for: .normal)
-        button.tintColor = .white
+        button.tintColor = UIColor(named:"fontColor")
         button.cornerRadius()
         button.isEnabled = false
         button.backgroundColor = UIColor.buttonDisabled
         return button
     }()
+    
+    // MARK: - Override properties
+    
+    override var shouldAutorotate: Bool {
+        return false
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
     
     // MARK: - Life Circle
     
@@ -68,12 +78,12 @@ class MainViewController: UIViewController {
     // MARK: - Private Functions
     
     private func setupViews(){
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.systemBackground
         setupActivity()
         setupLogo()
-        setupSelects()
         setupButton()
         setupTimerButtons()
+        setupSelects()
         setupConstraints()
     }
     
@@ -111,7 +121,7 @@ class MainViewController: UIViewController {
     private func setupConstraints(){
         let margins = view.layoutMarginsGuide
         NSLayoutConstraint.activate([
-            logoView.topAnchor.constraint(equalTo: margins.topAnchor),
+            logoView.topAnchor.constraint(equalTo: margins.topAnchor, constant: bottomPadding),
             logoView.heightAnchor.constraint(equalToConstant: logoHeight),
             logoView.leftAnchor.constraint(equalTo: margins.leftAnchor),
             logoView.rightAnchor.constraint(equalTo: margins.rightAnchor),
@@ -158,11 +168,11 @@ class MainViewController: UIViewController {
         guard let button = sender, let mainOutputDelegate = mainOutputDelegate else { return }
         mainOutputDelegate.setTime(sec: button.tag)
         for timerButton in timerButtons {
-            timerButton.backgroundColor = .white
-            timerButton.setTitleColor(.black, for: .normal)
+            timerButton.backgroundColor = UIColor.systemBackground
+            timerButton.setTitleColor(UIColor(named:"fontColor"), for: .normal)
         }
         button.backgroundColor = UIColor.dropdownButtonBorder
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(UIColor(named:"fontColor"), for: .normal)
     }
 
 }
@@ -200,7 +210,7 @@ extension MainViewController: MainInputDelegate {
             DispatchQueue.main.async { [self] in
                 let button = UIButton()
                 button.setTitle(String(time), for: .normal)
-                button.setTitleColor(.black, for: .normal)
+                button.setTitleColor(UIColor(named:"fontColor"), for: .normal)
                 button.layer.borderWidth = 1
                 button.layer.cornerRadius = 50.0 / 2.0
                 button.layer.borderColor = UIColor.dropdownButtonBorder.cgColor

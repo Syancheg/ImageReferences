@@ -5,7 +5,6 @@
 //  Created by Константин Кузнецов on 21.05.2022.
 //
 
-import Foundation
 import UIKit
 
 class ImageView: UIView {
@@ -48,10 +47,23 @@ class ImageView: UIView {
     // MARK: - Setup Views
     
     private func setupView() {
+        clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(imageView)
+        setupGesture()
         setupActivity()
         setupConstraints()
+    }
+    
+    private func setupGesture() {
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(zoomImage))
+        let panGesnture = UIPanGestureRecognizer(target: self, action: #selector(panImage))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapImage))
+        tapGesture.numberOfTapsRequired = 2
+        imageView.addGestureRecognizer(pinchGesture)
+        imageView.addGestureRecognizer(panGesnture)
+        imageView.addGestureRecognizer(tapGesture)
     }
     
     private func setupActivity() {
@@ -60,6 +72,35 @@ class ImageView: UIView {
         imageView.addSubview(activity)
         activity.translatesAutoresizingMaskIntoConstraints = false
         activity.startAnimating()
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func zoomImage(recognizer: UIPinchGestureRecognizer) {
+        guard let view = recognizer.view else { return }
+        view.transform = view.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
+        if frame.width > view.frame.width {
+            view.transform = .identity
+        }
+        recognizer.scale = 1.0
+    }
+    
+    @objc private func panImage(recognizer: UIPanGestureRecognizer) {
+        if recognizer.state == .began || recognizer.state == .changed  {
+            guard let view = recognizer.view else { return }
+            let translation = recognizer.translation(in: view)
+            let changeX = view.center.x + translation.x
+            let changeY = view.center.y + translation.y
+            view.center = CGPoint(x: changeX, y: changeY)
+            recognizer.setTranslation(CGPoint.zero, in: view)
+        }
+    }
+    
+    @objc private func doubleTapImage(recognizer: UITapGestureRecognizer) {
+        guard let view = recognizer.view else { return }
+        UIView.animate(withDuration: 0.3) {
+            view.transform = .identity
+        }
     }
     
     // MARK: - Setup Constraints
