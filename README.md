@@ -1,9 +1,10 @@
 # ImageReferences v1.0
+![Логотип приложения](http://syancheg.xyz/storage/references/readme/Icon-76@2x.png "Логотип приложения ImageReferences v1.0")
 ## iOs прилоежение для начинающих художников 
-![Alt-текст](http://syancheg.xyz/storage/references/readme/screen00003.jpg "test")
-![Alt-текст](http://syancheg.xyz/storage/references/readme/screen00008.jpg "test")
-![Alt-текст](http://syancheg.xyz/storage/references/readme/screen00004.jpg "test")
-![Alt-текст](http://syancheg.xyz/storage/references/readme/screen00001.jpg "test")
+![ImageReferences v1.0](http://syancheg.xyz/storage/references/readme/screen00003.jpg "iOs App ImageReferences v1.0 главный экран Dropdown")
+![ImageReferences v1.0](http://syancheg.xyz/storage/references/readme/screen00008.jpg "iOs App ImageReferences v1.0 главный экран iPhone 8")
+![ImageReferences v1.0](http://syancheg.xyz/storage/references/readme/screen00004.jpg "iOs App ImageReferences v1.0 экран изображения")
+![ImageReferences v1.0](http://syancheg.xyz/storage/references/readme/screen00001.jpg "iOs App ImageReferences v1.0 темная тема")
 
 Приложение помогает начинающим художникам "набить" руку. Оно содержит базу картинок для скетчей. Для подбора изображения предоставляется 4 фильтра и таймер.
 Нужно просто выбрать необходимые настройки и приступить.
@@ -16,10 +17,10 @@
 - Zoom и перетаскивание изображения
 - Темная и светлая темы
 
-![Alt-текст](http://syancheg.xyz/storage/references/readme/screen00007.jpg "test")
-![Alt-текст](http://syancheg.xyz/storage/references/readme/screen00002.jpg "test")
-![Alt-текст](http://syancheg.xyz/storage/references/readme/screen00006.jpg "test")
-![Alt-текст](http://syancheg.xyz/storage/references/readme/screen00012.jpg "test")
+![ImageReferences v1.0](http://syancheg.xyz/storage/references/readme/screen00007.jpg "iOs App ImageReferences v1.0 зум картинки")
+![ImageReferences v1.0](http://syancheg.xyz/storage/references/readme/screen00002.jpg "iOs App ImageReferences v1.0 таймер")
+![ImageReferences v1.0](http://syancheg.xyz/storage/references/readme/screen00006.jpg "iOs App ImageReferences v1.0 таймер")
+![ImageReferences v1.0](http://syancheg.xyz/storage/references/readme/screen00012.jpg "iOs App ImageReferences v1.0 темная тема")
 
 ## Технологии
 - Приложение реализовано под систему iOs 15 и выше
