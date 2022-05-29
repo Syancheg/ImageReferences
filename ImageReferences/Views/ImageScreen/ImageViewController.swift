@@ -45,11 +45,11 @@ class ImageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.systemBackground
         presenter.setImageInputDelegate(imageInputDelegate: self)
         imageOutputDelegate = presenter
-        guard imageOutputDelegate != nil else { return }
-        imageOutputDelegate!.getImage(with: self.currentFilters)
+        guard let delegate = imageOutputDelegate else { return }
+        delegate.getImage(with: self.currentFilters)
         setupView()
     }
     
@@ -62,12 +62,12 @@ class ImageViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
         button.setTitle("Начать", for: .normal)
+        timerView.fullTime = fullTime
+        timerView.delegate = self
         view.addSubview(timerView)
         view.addSubview(imageView)
         view.addSubview(button)
         setupConstraints()
-        timerView.fullTime = fullTime
-        timerView.delegate = self
     }
     
     // MARK: - Actions
@@ -139,8 +139,8 @@ extension ImageViewController: ImageInputDelegate {
 
 extension ImageViewController: TimerOutputDelegate {
     func showAlertTimer() {
-        let alert = UIAlertController(title: "Время вышло", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        let alert = UIAlertController(title: "Время вышло!", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
         self.present(alert, animated: true, completion: nil)
         button.isEnabled = false
         button.backgroundColor = UIColor.buttonDisabled
